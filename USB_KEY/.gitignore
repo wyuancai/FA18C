@@ -1,0 +1,6 @@
+.svn
+.mxproject
+MDK-ARM/*
+!MDK-ARM/RTE
+!MDK-ARM/*.uvprojx
+!MDK-ARM/*.s
