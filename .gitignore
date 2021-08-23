@@ -1,0 +1,4 @@
+PCB/*
+!PCB/*.PcbDoc
+!PCB/*.SchDoc
+!PCB/*.PrjPcb
