@@ -9,7 +9,7 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
 void app_init(void)
 {
     //启动TIME
-    HAL_TIM_Base_Start_IT(&htim6); 
+    HAL_TIM_Base_Start_IT(&htim4); 
     key_init();
 }
 
@@ -42,7 +42,7 @@ void app_loop(void)
 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-    if (htim == (&htim6))
+    if (htim == (&htim4))
     {
         key_timer(1);
     }
