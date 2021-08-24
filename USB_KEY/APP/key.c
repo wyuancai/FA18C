@@ -63,14 +63,14 @@ int key_scan(void)
             {//按着的
                 switch(temp)//判断已读的行
                 {
-                    case(KEY_ROW_IDLE ^ 0x01): s_key_value = 0x10; break;
-                    case(KEY_ROW_IDLE ^ 0x02): s_key_value = 0x20; break;
-                    case(KEY_ROW_IDLE ^ 0x04): s_key_value = 0x30; break;
-                    case(KEY_ROW_IDLE ^ 0x08): s_key_value = 0x40; break;
-                    case(KEY_ROW_IDLE ^ 0x10): s_key_value = 0x50; break;
-                    case(KEY_ROW_IDLE ^ 0x20): s_key_value = 0x60; break;
-                    case(KEY_ROW_IDLE ^ 0x40): s_key_value = 0x70; break;
-                    case(KEY_ROW_IDLE ^ 0x80): s_key_value = 0x80; break;
+                    case(KEY_ROW_IDLE ^ 0x01): s_key_value = 0x00; break;
+                    case(KEY_ROW_IDLE ^ 0x02): s_key_value = 0x10; break;
+                    case(KEY_ROW_IDLE ^ 0x04): s_key_value = 0x20; break;
+                    case(KEY_ROW_IDLE ^ 0x08): s_key_value = 0x30; break;
+                    case(KEY_ROW_IDLE ^ 0x10): s_key_value = 0x40; break;
+                    case(KEY_ROW_IDLE ^ 0x20): s_key_value = 0x50; break;
+                    case(KEY_ROW_IDLE ^ 0x40): s_key_value = 0x60; break;
+                    case(KEY_ROW_IDLE ^ 0x80): s_key_value = 0x70; break;
                     default:   
                         s_is_key_press = 0; 
                         s_key_output = -1;
