@@ -74,7 +74,32 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=WHOCTXJW
 
+[Document3]
+DocumentPath=CPU.PcbDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=FHRIXTMF
+
 [GeneratedDocument1]
+DocumentPath=Project Outputs for FA18_AMPCD\Design Rule Check - CPU.html
+DItemRevisionGUID=
+
+[GeneratedDocument2]
+DocumentPath=Project Outputs for FA18_AMPCD\Design Rule Check - FA18_AMPCD.html
+DItemRevisionGUID=
+
+[GeneratedDocument3]
 DocumentPath=Project Outputs for FA18_DDI\Design Rule Check - FA18_DDI.html
 DItemRevisionGUID=
 
