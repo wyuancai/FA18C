@@ -59,28 +59,26 @@ int key_scan(void)
         {/*读行*/
             temp = READ_KEY_ROW;
             
-            if(temp != KEY_ROW_IDLE) 
-            {//按着的
-                switch(temp)//判断已读的行
-                {
-                    case(KEY_ROW_IDLE ^ 0x01): s_key_value = 0x00; break;
-                    case(KEY_ROW_IDLE ^ 0x02): s_key_value = 0x10; break;
-                    case(KEY_ROW_IDLE ^ 0x04): s_key_value = 0x20; break;
-                    case(KEY_ROW_IDLE ^ 0x08): s_key_value = 0x30; break;
-                    case(KEY_ROW_IDLE ^ 0x10): s_key_value = 0x40; break;
-                    case(KEY_ROW_IDLE ^ 0x20): s_key_value = 0x50; break;
-                    case(KEY_ROW_IDLE ^ 0x40): s_key_value = 0x60; break;
-                    case(KEY_ROW_IDLE ^ 0x80): s_key_value = 0x70; break;
-                    default:   
-                        s_is_key_press = 0; 
-                        s_key_output = -1;
-                        return -1;//错误
-                }
-                
-                //准备读列
-                s_is_key_press = 2;
-                switch_column_scan();
+            switch(temp)//判断已读的行
+            {
+                case(KEY_ROW_IDLE ^ 0x01): s_key_value = 0x00; break;
+                case(KEY_ROW_IDLE ^ 0x02): s_key_value = 0x10; break;
+                case(KEY_ROW_IDLE ^ 0x04): s_key_value = 0x20; break;
+                case(KEY_ROW_IDLE ^ 0x08): s_key_value = 0x30; break;
+                case(KEY_ROW_IDLE ^ 0x10): s_key_value = 0x40; break;
+                case(KEY_ROW_IDLE ^ 0x20): s_key_value = 0x50; break;
+                case(KEY_ROW_IDLE ^ 0x40): s_key_value = 0x60; break;
+                case(KEY_ROW_IDLE ^ 0x80): s_key_value = 0x70; break;
+                default:   
+                    s_is_key_press = 0; 
+                    s_key_output = -1;
+                    return -1;//错误
             }
+            
+            //准备读列
+            s_is_key_press = 2;
+            switch_column_scan();
+
         }
         else
         {/*读列*/
@@ -89,44 +87,42 @@ int key_scan(void)
             //准备读行 
             switch_row_scan();
             
-            if(temp != KEY_COLUMN_IDLE)
+            switch(temp) //判断已读的列
             {
-                switch(temp) //判断已读的列
-                {
-                    case(KEY_COLUMN_IDLE ^ 0x0001): s_key_value = s_key_value + 0; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0002): s_key_value = s_key_value + 1; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0004): s_key_value = s_key_value + 2; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0008): s_key_value = s_key_value + 3; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0010): s_key_value = s_key_value + 4; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0020): s_key_value = s_key_value + 5; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0040): s_key_value = s_key_value + 6; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0080): s_key_value = s_key_value + 7; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0100): s_key_value = s_key_value + 8; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0200): s_key_value = s_key_value + 9; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0400): s_key_value = s_key_value + 10; break;
-                    case(KEY_COLUMN_IDLE ^ 0x0800): s_key_value = s_key_value + 11; break;
-                    case(KEY_COLUMN_IDLE ^ 0x1000): s_key_value = s_key_value + 12; break;
-                    case(KEY_COLUMN_IDLE ^ 0x2000): s_key_value = s_key_value + 13; break;
-                    case(KEY_COLUMN_IDLE ^ 0x4000): s_key_value = s_key_value + 14; break;
-                    case(KEY_COLUMN_IDLE ^ 0x8000): s_key_value = s_key_value + 15; break;
-                    default:   
-                        s_is_key_press = 0; 
-                        s_key_output = -1;
-                        return -1;//错误
-                }
-                
-                s_is_key_press = 1;
-                
-                if(s_key_output != -1 && s_key_output != s_key_value)
-                {
-                    //按了另一个键
+                case(KEY_COLUMN_IDLE ^ 0x0001): s_key_value = s_key_value + 0; break;
+                case(KEY_COLUMN_IDLE ^ 0x0002): s_key_value = s_key_value + 1; break;
+                case(KEY_COLUMN_IDLE ^ 0x0004): s_key_value = s_key_value + 2; break;
+                case(KEY_COLUMN_IDLE ^ 0x0008): s_key_value = s_key_value + 3; break;
+                case(KEY_COLUMN_IDLE ^ 0x0010): s_key_value = s_key_value + 4; break;
+                case(KEY_COLUMN_IDLE ^ 0x0020): s_key_value = s_key_value + 5; break;
+                case(KEY_COLUMN_IDLE ^ 0x0040): s_key_value = s_key_value + 6; break;
+                case(KEY_COLUMN_IDLE ^ 0x0080): s_key_value = s_key_value + 7; break;
+                case(KEY_COLUMN_IDLE ^ 0x0100): s_key_value = s_key_value + 8; break;
+                case(KEY_COLUMN_IDLE ^ 0x0200): s_key_value = s_key_value + 9; break;
+                case(KEY_COLUMN_IDLE ^ 0x0400): s_key_value = s_key_value + 10; break;
+                case(KEY_COLUMN_IDLE ^ 0x0800): s_key_value = s_key_value + 11; break;
+                case(KEY_COLUMN_IDLE ^ 0x1000): s_key_value = s_key_value + 12; break;
+                case(KEY_COLUMN_IDLE ^ 0x2000): s_key_value = s_key_value + 13; break;
+                case(KEY_COLUMN_IDLE ^ 0x4000): s_key_value = s_key_value + 14; break;
+                case(KEY_COLUMN_IDLE ^ 0x8000): s_key_value = s_key_value + 15; break;
+                default:   
+                    s_is_key_press = 0; 
                     s_key_output = -1;
-                    s_is_key_press = 0;
-                    return -1;
-                }
-                
-                s_key_output = s_key_value; //一遍扫描完成记录键值
-            }         
+                    return -1;//错误
+            }
+            
+            s_is_key_press = 1;
+            
+            if(s_key_output != -1 && s_key_output != s_key_value)
+            {
+                //按了另一个键
+                s_key_output = -1;
+                s_is_key_press = 0;
+                return -1;
+            }
+            
+            s_key_output = s_key_value; //一遍扫描完成记录键值
+                    
         }
     }
     

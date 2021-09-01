@@ -14,7 +14,7 @@ void app_init(void)
 
 void app_loop(void)
 {
-    int key_value = -1, key_value_old = -1;
+    static int key_value = -1, key_value_old = -1;
     key_value = key_scan();
     
     if(key_value != key_value_old)
@@ -33,10 +33,73 @@ void app_loop(void)
             uint16_t residual = key_value % 36; //(a-z 1-9 0)
             uint16_t divide = key_value / 36;
             
-            if(divide == 0){
-                KeyBoard[0] = 0x07; //左Control Shift Alt
-            }else if(divide == 1){
-                KeyBoard[0] = 0x70; //右Control Shift Alt
+            switch(divide)
+            {
+                case 0:
+                    //KeyBoard[0] = 0x07; //左Control Shift Alt
+
+                    //模拟一个一个按按键
+                    KeyBoard[0] = 0x01;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0x03;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0x07;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+
+                    break;
+                case 1:
+                    //KeyBoard[0] = 0x70; //右Control Shift Alt
+
+                    KeyBoard[0] = 0x10;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0x30;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0x70;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    
+                    break;
+                case 2:
+                    //KeyBoard[0] = 0x0F; //左Control Shift Alt win
+
+                    KeyBoard[0] = 0x01;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0x03;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0x07;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0x0F;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+
+                    break;
+                case 3:
+                    //KeyBoard[0] = 0xF0; //右Control Shift Alt win
+
+                    KeyBoard[0] = 0x10;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0x30;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0x70;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+                    KeyBoard[0] = 0xF0;
+                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
+                    HAL_Delay(20);
+
+                    break;
+                default:
+                    break;
             }
             
             KeyBoard[2] = residual + 4; //从4开始对应 [a-z 1-9 0]
