@@ -2,7 +2,7 @@
 #include "usbd_hid.h"
 #include "key.h"
 
-uint8_t KeyBoard[8] = {0,0,4,0,0,0,0,0};
+uint8_t KeyBoard[16] = {0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0};
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
 void app_init(void)
@@ -24,85 +24,16 @@ void app_loop(void)
         if(key_value == -1)
         {
             //按键松开了
-            memset(KeyBoard, 0, 8);
+            memset(KeyBoard, 0, sizeof(KeyBoard));
             USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
         }
         else
         {
             //发送键值
-            uint16_t residual = key_value % 36; //(a-z 1-9 0)
-            uint16_t divide = key_value / 36;
+            uint16_t bit = key_value % 8; //位   位置
+            uint16_t byte = key_value / 8;//字节 位置
             
-            switch(divide)
-            {
-                case 0:
-                    //KeyBoard[0] = 0x07; //左Control Shift Alt
-
-                    //模拟一个一个按按键
-                    KeyBoard[0] = 0x01;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0x03;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0x07;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-
-                    break;
-                case 1:
-                    //KeyBoard[0] = 0x70; //右Control Shift Alt
-
-                    KeyBoard[0] = 0x10;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0x30;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0x70;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    
-                    break;
-                case 2:
-                    //KeyBoard[0] = 0x0F; //左Control Shift Alt win
-
-                    KeyBoard[0] = 0x01;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0x03;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0x07;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0x0F;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-
-                    break;
-                case 3:
-                    //KeyBoard[0] = 0xF0; //右Control Shift Alt win
-
-                    KeyBoard[0] = 0x10;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0x30;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0x70;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-                    KeyBoard[0] = 0xF0;
-                    USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
-                    HAL_Delay(20);
-
-                    break;
-                default:
-                    break;
-            }
-            
-            KeyBoard[2] = residual + 4; //从4开始对应 [a-z 1-9 0]
+            KeyBoard[12 + byte] = 0x01 << bit; //按键对应的位
             
             USBD_HID_SendReport(&hUsbDeviceFS, (uint8_t*)&KeyBoard, sizeof(KeyBoard));
         }
