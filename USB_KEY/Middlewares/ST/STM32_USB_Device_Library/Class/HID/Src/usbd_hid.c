@@ -322,35 +322,36 @@ __ALIGN_BEGIN static uint8_t HID_DEVICE_ReportDesc[HID_DEVICE_REPORT_DESC_SIZE] 
     0x09, 0x04,                    // USAGE (Joystick)
     0xa1, 0x01,                    // COLLECTION (Application)
 
-    //主指针  24字节
+    //28字节
     0x05, 0x01,                    //   USAGE_PAGE (Generic Desktop)
     0x09, 0x01,                    //   USAGE (Pointer) 指针
     0xa1, 0x00,                    //   COLLECTION (Physical)
     0x09, 0x30,                    //     USAGE (X)
     0x09, 0x31,                    //     USAGE (Y)
     0x09, 0x32,                    //     USAGE (Z)
-    0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-    0x26, 0x00, 0x10,              //     LOGICAL_MAXIMUM (4096)
-    0x75, 0x10,                    //     REPORT_SIZE (16)
-    0x95, 3,                       //     REPORT_COUNT (x) //轴数量
-    0x81, 0x02,                    //     INPUT (Data,Var,Abs)
-    0xc0,                          //   END_COLLECTION
-    
-    //次指针  24字节
-    0x05, 0x01,                    //   USAGE_PAGE (Generic Desktop)
-    0x09, 0x01,                    //   USAGE (Pointer) 指针
-    0xa1, 0x00,                    //   COLLECTION (Physical)
     0x09, 0x33,                    //     USAGE (Rx)
     0x09, 0x34,                    //     USAGE (Ry)
-    0x09, 0x35,                    //     USAGE (Rz)
+    //0x09, 0x35,                    //     USAGE (Rz)
     0x15, 0x00,                    //     LOGICAL_MINIMUM (0)
-    0x26, 0x00, 0x10,              //     LOGICAL_MAXIMUM (4096)
-    0x75, 0x10,                    //     REPORT_SIZE (16)
-    0x95, 3,                      //     REPORT_COUNT (x) //次要轴数量
+    0x26, 0xFF, 0x00,              //     LOGICAL_MAXIMUM (255)
+    0x75, 0x08,                    //     REPORT_SIZE (8)
+    0x95, 0x05,                    //     REPORT_COUNT (x) //轴数量
     0x81, 0x02,                    //     INPUT (Data,Var,Abs)
     0xc0,                          //   END_COLLECTION
     
-//    //滑块 18字节 有问题
+    //18字节    
+    0x09, 0x39,                    //   USAGE (Hat switch)
+    0x15, 0x01,                    //   LOGICAL_MINIMUM (1)
+    0x25, 0x08,                    //   LOGICAL_MAXIMUM (8)
+    0x75, 0x04,                    //   REPORT_SIZE (6)
+    0x95, 0x01,                    //   REPORT_COUNT (1)
+    0x81, 0x42,                    //   INPUT (Data,Var,Abs,Null)
+    
+    0x95, 0x01,                    //   REPORT_COUNT (1)
+    0x75, 0x08,                    //   REPORT_SIZE (2)
+    0x81, 0x03,                    //   INPUT (Cnst,Var,Abs)
+    
+//    //18字节 有问题
 //    0x09, 0x36,                    //   USAGE (Slider)
 //    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
 //    0x26, 0xff, 0x00,              //   LOGICAL_MAXIMUM (255)
@@ -360,14 +361,14 @@ __ALIGN_BEGIN static uint8_t HID_DEVICE_ReportDesc[HID_DEVICE_REPORT_DESC_SIZE] 
 //    0x95, 0x01,                    //   REPORT_COUNT (1) 数量
 //    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
 
-//    //按键 16字节
+    //16字节
     0x05, 0x09,                    //   USAGE_PAGE (Button)
     0x19, 0x01,                    //   USAGE_MINIMUM (Button 1)
-    0x29, 32,                     //   USAGE_MAXIMUM (Button x) 按键结束编号
+    0x29, 96,                      //   USAGE_MAXIMUM (Button x) 按键结束编号
     0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
     0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
     0x75, 0x01,                    //   REPORT_SIZE (1)
-    0x95, 32,        				//   REPORT_COUNT (48)  数量  只能显示32个？
+    0x95, 96,        			   //   REPORT_COUNT (x)  数量  只能显示32个？
     0x81, 0x02,                    //   INPUT (Data,Var,Abs)
 
     // 1字节
