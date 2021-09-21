@@ -1,9 +1,9 @@
 #MicroXplorer Configuration settings - do not modify
 ADC1.Channel-0\#ChannelRegularConversion=ADC_CHANNEL_0
-ADC1.Channel-1\#ChannelRegularConversion=ADC_CHANNEL_0
-ADC1.Channel-2\#ChannelRegularConversion=ADC_CHANNEL_0
-ADC1.Channel-3\#ChannelRegularConversion=ADC_CHANNEL_0
-ADC1.Channel-4\#ChannelRegularConversion=ADC_CHANNEL_0
+ADC1.Channel-1\#ChannelRegularConversion=ADC_CHANNEL_1
+ADC1.Channel-2\#ChannelRegularConversion=ADC_CHANNEL_2
+ADC1.Channel-3\#ChannelRegularConversion=ADC_CHANNEL_3
+ADC1.Channel-4\#ChannelRegularConversion=ADC_CHANNEL_4
 ADC1.ContinuousConvMode=DISABLE
 ADC1.IPParameters=Rank-0\#ChannelRegularConversion,Channel-0\#ChannelRegularConversion,SamplingTime-0\#ChannelRegularConversion,NbrOfConversionFlag,master,ContinuousConvMode,Rank-1\#ChannelRegularConversion,Channel-1\#ChannelRegularConversion,SamplingTime-1\#ChannelRegularConversion,Rank-2\#ChannelRegularConversion,Channel-2\#ChannelRegularConversion,SamplingTime-2\#ChannelRegularConversion,Rank-3\#ChannelRegularConversion,Channel-3\#ChannelRegularConversion,SamplingTime-3\#ChannelRegularConversion,Rank-4\#ChannelRegularConversion,Channel-4\#ChannelRegularConversion,SamplingTime-4\#ChannelRegularConversion,NbrOfConversion
 ADC1.NbrOfConversion=5
@@ -304,7 +304,7 @@ USB_DEVICE.USBD_MAX_NUM_CONFIGURATION=1
 USB_DEVICE.USBD_MAX_NUM_INTERFACES=1
 USB_DEVICE.USBD_MAX_STR_DESC_SIZ=512
 USB_DEVICE.USBD_SELF_POWERED=1
-USB_DEVICE.VID=1055
+USB_DEVICE.VID=1155
 USB_DEVICE.VirtualMode=Hid
 USB_DEVICE.VirtualModeFS=Hid_FS
 VP_SYS_VS_Systick.Mode=SysTick

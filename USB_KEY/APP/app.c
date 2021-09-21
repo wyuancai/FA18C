@@ -53,7 +53,7 @@ void app_loop(void)
         key_value_old = key_value;
         if(key_value == -1){
             //按键松开了
-            memset(USB_send_buff, ADC_CHANNEL_NUM + 1, usb_key_buff_len); //清除键值
+            memset(USB_send_buff + ADC_CHANNEL_NUM + 1, 0, usb_key_buff_len); //清除键值
         }else{
             //按键按下
             uint16_t bit = key_value % 8; //位   位置
@@ -110,7 +110,7 @@ void app_loop(void)
         s_adc_status = ADC_DMA_IDLE;
         
         for(uint8_t i=0; i<ADC_CHANNEL_NUM; i++){
-            USB_send_buff[i] = s_adc_dma_buff[i] >> 2;
+            USB_send_buff[i] = s_adc_dma_buff[i] >> 4;
         }
     }
     

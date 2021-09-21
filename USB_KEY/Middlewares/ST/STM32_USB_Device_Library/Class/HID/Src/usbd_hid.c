@@ -343,12 +343,12 @@ __ALIGN_BEGIN static uint8_t HID_DEVICE_ReportDesc[HID_DEVICE_REPORT_DESC_SIZE] 
     0x09, 0x39,                    //   USAGE (Hat switch)
     0x15, 0x01,                    //   LOGICAL_MINIMUM (1)
     0x25, 0x08,                    //   LOGICAL_MAXIMUM (8)
-    0x75, 0x04,                    //   REPORT_SIZE (6)
+    0x75, 0x04,                    //   REPORT_SIZE (4)
     0x95, 0x01,                    //   REPORT_COUNT (1)
     0x81, 0x42,                    //   INPUT (Data,Var,Abs,Null)
     
     0x95, 0x01,                    //   REPORT_COUNT (1)
-    0x75, 0x08,                    //   REPORT_SIZE (2)
+    0x75, 0x04,                    //   REPORT_SIZE (4)
     0x81, 0x03,                    //   INPUT (Cnst,Var,Abs)
     
 //    //18字节 有问题
