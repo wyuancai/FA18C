@@ -74,24 +74,24 @@ void app_loop(void)
         uint8_t temp = 0;
         if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_15) == 0){
             temp &= 0xF8;
-            temp |= 0x02;
+            temp |= 0x01;
         }else if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13) == 0){
             temp &= 0xF8;
-            temp |= 0x04;
+            temp |= 0x02;
         }else{
             temp &= 0xF8;
-            temp |= 0x01;
+            temp |= 0x04;
         }
         
         if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_14) == 0){
             temp &= 0xC7;
-            temp |= 0x10;
+            temp |= 0x08;
         }else if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_15) == 0){
             temp &= 0xC7;
-            temp |= 0x20;
+            temp |= 0x10;
         }else{
             temp &= 0xC7;
-            temp |= 0x08;
+            temp |= 0x20;
         }
         
         USB_send_buff[ADC_CHANNEL_NUM] = temp;
